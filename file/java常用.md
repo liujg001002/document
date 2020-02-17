@@ -1,14 +1,14 @@
-#将jar包打入本地仓库
-mvn install:install-file -DgroupId=org.xl.brave   -DartifactId=brave-axis2 -Dversion=0.0.1  -Dfile=C:\Users\sy\Desktop\brave-axis2-0.0.1-SNAPSHOT.jar    -Dpackaging=jar
+###将jar包打入本地仓库
+>mvn install:install-file -DgroupId=org.xl.brave   -DartifactId=brave-axis2 -Dversion=0.0.1  -Dfile=C:\Users\sy\Desktop\brave-axis2-0.0.1-SNAPSHOT.jar    -Dpackaging=jar
 
-#多线程远程feign调用请求丢失解决办法
-#开启新线程之前，添加代码：
-#将RequestAttributes对象设置为子线程共享
-ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+###多线程远程feign调用请求丢失解决办法
+###开启新线程之前，添加代码：
+###将RequestAttributes对象设置为子线程共享
+>ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 RequestContextHolder.setRequestAttributes(sra, true);
 
-#entity常用注解(字段如果为空是不会走@length,@patten等验证,判断 空需要组合使用)
-@Null  被注释的元素必须为null
+###entity常用注解(字段如果为空是不会走@length,@patten等验证,判断 空需要组合使用)
+>@Null  被注释的元素必须为null
 @NotNull  被注释的元素不能为null
 @AssertTrue  被注释的元素必须为true
 @AssertFalse  被注释的元素必须为false
@@ -26,17 +26,18 @@ RequestContextHolder.setRequestAttributes(sra, true);
 @NotEmpty  被注释的字符串必须非空
 @Range  被注释的元素必须在合适的范围内
 
-#解决feign 调用失败
+###解决feign 调用失败
 @RequestMapping(value = "/generate/password", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-#long返回前端转string
+###long返回前端转string
 @JSONField(serializeUsing= ToStringSerializer.class)
 
-##增强的controller注解@ControllerAdvice
-全局异常处理
-全局数据绑定
-全局数据预处理
+###增强的controller注解@ControllerAdvice
+* [地址](https://www.cnblogs.com/lenve/p/10748453.html)
+* 全局异常处理
+* 全局数据绑定
+* 全局数据预处理
 
-##Date 日期格式化传递
+###Date 日期格式化传递
 @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
