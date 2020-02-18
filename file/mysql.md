@@ -1,7 +1,7 @@
 一个表最多16个索引,最大索引长度256字节，mysql8.0本地测试（varchar(191)），
 索引一般不明显影响插入性能（大量小数据例外），因为建立索引的时间开销是O(1)或者O(logN)
 
-1. 函数（function）
+###1. 函数（function）
 > 函数只会返回一个值(储存过程返回结果集)
 
 * 用法：
@@ -31,7 +31,7 @@ DELIMITER ;
 select  select_user(1,1);#执行方法   
 drop function select_user;#删除函数
 
-2. 储存过程（PROCEDURE）
+###2. 储存过程（PROCEDURE）
 >DELIMITER // --创建过程  
  CREATE PROCEDURE select_user_p(in val_1 int,in val_2 int,out val varchar(20))  
  BEGIN  
