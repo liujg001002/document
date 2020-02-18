@@ -1,15 +1,15 @@
-一个表最多16个索引,最大索引长度256字节，mysql8.0本地测试（varchar(191)），
-索引一般不明显影响插入性能（大量小数据例外），因为建立索引的时间开销是O(1)或者O(logN)
+* 一个表最多16个索引,最大索引长度256字节，mysql8.0本地测试（varchar(191)），  
+* 索引一般不明显影响插入性能（大量小数据例外），因为建立索引的时间开销是O(1)或者O(logN) 
+* 出现1418错误时(执行)  
+>set global log_bin_trust_function_creators = 1;  
+start slave; 
+* DELIMITER //  #为转译
 
 ###1. 函数（function）
 > 函数只会返回一个值(储存过程返回结果集)
 
 * 用法：
-> *出现1418错误时  
-*set global log_bin_trust_function_creators = 1;  
-*start slave;
-*DELIMITER // 为转译
-DELIMITER //--创建函数  
+>DELIMITER //--创建函数  
 CREATE FUNCTION select_user(val_1 int,val_2 int)  
 RETURNS BIGINT(20)  
 BEGIN  
