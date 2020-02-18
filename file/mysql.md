@@ -3,20 +3,20 @@
 * 出现1418错误时(执行)  
 >set global log_bin_trust_function_creators = 1;  
 start slave; 
-* DELIMITER //  #为转译
+* DELIMITER //  #为转译(分隔符)
 
 ###1. 函数（function）
 > 函数只会返回一个值(储存过程返回结果集)
 
 * 用法：
->DELIMITER //--创建函数  
+>DELIMITER //  --创建函数 (设置分隔符为//) 
 CREATE FUNCTION select_user(val_1 int,val_2 int)  
 RETURNS BIGINT(20)  
 BEGIN  
 	RETURN 10;  	
 END;  
 //  
-DELIMITER ;    
+DELIMITER ;   --还原分割符为分号 
 //-----------------------  
 DELIMITER //--创建函数  
 CREATE FUNCTION select_user(val_1 int,val_2 int)  
