@@ -27,9 +27,9 @@ RequestContextHolder.setRequestAttributes(sra, true);
 @Range  被注释的元素必须在合适的范围内
 
 ###解决feign 调用失败
-@RequestMapping(value = "/generate/password", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+>@RequestMapping(value = "/generate/password", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 ###long返回前端转string
-@JSONField(serializeUsing= ToStringSerializer.class)
+>@JSONField(serializeUsing= ToStringSerializer.class)
 
 ###增强的controller注解@ControllerAdvice
 * [地址](https://www.cnblogs.com/lenve/p/10748453.html)
@@ -38,7 +38,7 @@ RequestContextHolder.setRequestAttributes(sra, true);
 * 全局数据预处理
 
 ###Date 日期格式化传递
-@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+>@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")  
 @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
 #获取handlerUrl
