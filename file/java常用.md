@@ -44,21 +44,21 @@ RequestContextHolder.setRequestAttributes(sra, true);
 @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
 #获取handlerUrl
->private String getHandlerUrl(HttpServletRequest request) {  
-    String servletPath = request.getServletPath();  
-    Map pathVariables = (Map)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  
-    for (Object key : pathVariables.keySet()) {  
-        String pKey = new StringBuffer("/").append(pathVariables.get(key)).toString();  
-        String pValue = new StringBuffer("/{").append(key).append("}").toString();  
-        servletPath = servletPath.replace(pKey, pValue);  
-    }  
-    log.info("--------------------> handler: {}", servletPath);  
-    return servletPath;  
-}
+    private String getHandlerUrl(HttpServletRequest request) {  
+        String servletPath = request.getServletPath();  
+        Map pathVariables = (Map)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  
+        for (Object key : pathVariables.keySet()) {  
+            String pKey = new StringBuffer("/").append(pathVariables.get(key)).toString();  
+            String pValue = new StringBuffer("/{").append(key).append("}").toString();  
+            servletPath = servletPath.replace(pKey, pValue);  
+        }  
+        log.info("--------------------> handler: {}", servletPath);  
+        return servletPath;  
+    }
 #获取项目中controller uri
->@Resource  
-private BeanFactory beanFactory;  
-private String getAllRequestMappingInfo() {  
+    @Resource  
+    private BeanFactory beanFactory;  
+    private String getAllRequestMappingInfo() {  
         AbstractHandlerMethodMapping<RequestMappingInfo> objHandlerMethodMapping = (AbstractHandlerMethodMapping<RequestMappingInfo>) beanFactory.getBean("requestMappingHandlerMapping");  
         Map<RequestMappingInfo, HandlerMethod> mapRet = objHandlerMethodMapping.getHandlerMethods();  
         Set<RequestMappingInfo> requestMappingInfos = mapRet.keySet();  
@@ -70,9 +70,9 @@ private String getAllRequestMappingInfo() {
             System.out.println(patterns.toString() +" --  "+ methods.toString());  
         }  
         return "test ok";  
-}
+    }
 #docker中无法读取文件  将文件写入jar包外目录
->public String loadingSecretKey(String path)throws IOException {  
+    public String loadingSecretKey(String path)throws IOException {  
         String oldPath = path;  
         //获取路径方式1  
         //File directory = new File("");//参数为空  
@@ -83,7 +83,7 @@ private String getAllRequestMappingInfo() {
         File file = new File(path);  
         if(!file.exists()){  
             log.info("-------------->写文件"+path);  
-            InputStream inputStream=this.getClass().getClassLoader()  
+            InputStream inputStream=this.getClass().getClassLoader()
                     .getResourceAsStream(oldPath);  
             byte[] buffer = new byte[inputStream.available()];  
             inputStream.read(buffer);  
@@ -93,3 +93,35 @@ private String getAllRequestMappingInfo() {
         log.info("----------getAbsolutePath:"+file.getAbsolutePath());  
         return path;  
     }
+
+#文件复制
+    public static void copy(File file,File source) throws IOException{
+
+        FileChannel writeChannel = null;
+        FileChannel readChannel = null;
+        try {
+            RandomAccessFile rw = new RandomAccessFile(file, "rw");
+            writeChannel = rw.getChannel();
+
+            //读取
+            readChannel = new FileInputStream(source).getChannel();
+
+            //文件复制
+            writeChannel.transferFrom(readChannel, 0, readChannel.size());
+
+            //ByteBuffer buff = ByteBuffer.wrap("Hello world".getBytes(StandardCharsets.UTF_8));
+            writeChannel.close();
+            readChannel.close();
+            System.out.println("complete");
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (writeChannel != null) {
+                writeChannel.close();
+            }
+            if (readChannel != null) {
+                writeChannel.close();
+            }
+        }
+    }
+ 
