@@ -75,7 +75,6 @@ private String getAllRequestMappingInfo() {
 >public String loadingSecretKey(String path)throws IOException {  
         String oldPath = path;  
         String workPath = System.getProperty("user.dir")+"\\";  
-        path = workPath + path.replace("key/","");  
         log.info("---------------->"+path);  
         File file = new File(path);  
         if(!file.exists()){  
