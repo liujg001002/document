@@ -71,7 +71,7 @@ RequestContextHolder.setRequestAttributes(sra, true);
         }  
         return "test ok";  
     }
-#docker中无法读取文件  将文件写入jar包外目录
+#docker中无法读取文件  将文件写入jar包外目录(guava  Files.write)
     public String loadingSecretKey(String path)throws IOException {  
         String oldPath = path;  
         //获取路径方式1  
