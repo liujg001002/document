@@ -74,6 +74,10 @@ private String getAllRequestMappingInfo() {
 #docker中无法读取文件  将文件写入jar包外目录
 >public String loadingSecretKey(String path)throws IOException {  
         String oldPath = path;  
+        //获取路径方式1  
+        //File directory = new File("");//参数为空  
+        //String workPath = directory.getCanonicalPath() ;  
+        //获取路径方式2  
         String workPath = System.getProperty("user.dir")+"\\";  
         log.info("---------------->"+path);  
         File file = new File(path);  
