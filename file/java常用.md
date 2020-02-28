@@ -71,3 +71,22 @@ private String getAllRequestMappingInfo() {
         }  
         return "test ok";  
 }
+#docker中无法读取文件  将文件写入jar包外目录
+>public String loadingSecretKey(String path)throws IOException {  
+        String oldPath = path;  
+        String workPath = System.getProperty("user.dir")+"\\";  
+        path = workPath + path.replace("key/","");  
+        log.info("---------------->"+path);  
+        File file = new File(path);  
+        if(!file.exists()){  
+            log.info("-------------->写文件"+path);  
+            InputStream inputStream=this.getClass().getClassLoader()  
+                    .getResourceAsStream(oldPath);  
+            byte[] buffer = new byte[inputStream.available()];  
+            inputStream.read(buffer);  
+            Files.write(buffer, file);  
+        }  
+        log.info("----------path:"+file.getPath());  
+        log.info("----------getAbsolutePath:"+file.getAbsolutePath());  
+        return path;  
+    }
