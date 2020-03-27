@@ -124,4 +124,38 @@ RequestContextHolder.setRequestAttributes(sra, true);
             }
         }
     }
- 
+ # httpClient
+     private static final String DEFAULT_CHARSET = "UTF-8";
+     public static String httpPostWithJSON(String url,Map<String,Object> params) throws Exception {
+    
+         HttpPost httpPost = new HttpPost(url);
+         CloseableHttpClient client = HttpClients.createDefault();
+         String respContent = null;
+    
+    //        json方式
+         JSONObject jsonParam = new JSONObject(params);
+         StringEntity entity = new StringEntity(jsonParam.toString(),DEFAULT_CHARSET);//解决中文乱码问题
+         entity.setContentEncoding(DEFAULT_CHARSET);
+         entity.setContentType("application/json");
+         httpPost.setEntity(entity);
+         System.out.println();
+    
+    
+    //        //表单方式
+    //        List<BasicNameValuePair> pairList = new ArrayList();
+    //        if (params != null && !params.isEmpty()) {
+    //            Set<String> keys = params.keySet();
+    //            for (String key : keys) {
+    //                pairList.add(new BasicNameValuePair(key, String.valueOf(params.get(key))));
+    //            }
+    //        }
+    //        httpPost.setEntity(new UrlEncodedFormEntity(pairList, DEFAULT_CHARSET));
+    
+    
+         HttpResponse resp = client.execute(httpPost);
+         if(resp.getStatusLine().getStatusCode() == 200) {
+             HttpEntity he = resp.getEntity();
+             respContent = EntityUtils.toString(he,DEFAULT_CHARSET);
+         }
+         return respContent;
+     }
