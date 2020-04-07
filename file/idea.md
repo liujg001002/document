@@ -18,7 +18,7 @@ groovyScript("return \"${_1}\" ", methodParameters())
 2. free mybatis plugin (mybatis插件) 
 3. MyBatis Log Plugin (控制台显示完整的可执行sql语句)
 4. Restfultoolkit (url查找 及controller调试)
-5. easy code 代码生成插件
+5. easy code 代码生成插件 [相关文档](https://gitee.com/makejava/EasyCode/wikis/pages)
 
 ### idea在service显示多个窗口
 >.idea->workspace 下中找到 RunDashboard 替换成如下
