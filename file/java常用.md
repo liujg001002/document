@@ -26,7 +26,10 @@ RequestContextHolder.setRequestAttributes(sra, true);
 @NotEmpty  被注释的字符串必须非空  
 @Range  被注释的元素必须在合适的范围内  
 @Valid 用于注释元素为自定义对象(controller 参数 dto中实体)  
-@Validated  用于controller 实体对象上（提示改实体需要进行校验）
+@Validated  用于controller 实体对象上（提示改实体需要进行校验） 
+
+###lombok
+>@Accessors(chain = true) 链式返回当前对象
 
 ###解决feign 调用失败
 >@RequestMapping(value = "/generate/password", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
